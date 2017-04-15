@@ -770,7 +770,7 @@ getAURPackageNameAsURL() {
 }
 
 gnomeLoginBG() {
-  local IMAGE=$1
+  local IMAGE="/home/tyler274/Pictures/xfckbb.jpg"
   local CREATED_TMP="0"
   local GST=/usr/share/gnome-shell/gnome-shell-theme.gresource
   local GSTRES=$(basename $GST)
@@ -806,9 +806,10 @@ gnomeLoginBG() {
 
   echo "
 #lockDialogGroup {
-  background: #2e3436 url(resource:///org/gnome/shell/theme/${IMAGE});
+  background: #2e3436 url(${IMAGE});
   background-repeat: no-repeat;
-  background-size: cover; }" >>gnome-shell.tmp
+  background-size: cover;
+  background-position: center center; }" >>gnome-shell.tmp
 
   sync
   mv gnome-shell.tmp gnome-shell.css
@@ -826,8 +827,6 @@ gnomeLoginBG() {
 
   sudo mv "/usr/share/gnome-shell/$GSTRES" "/usr/share/gnome-shell/${GSTRES}.backup"
   sudo mv "$GSTRES" /usr/share/gnome-shell/
-
-  rm -r $WORKDIR
 
   if [ "$CREATED_TMP" = "1" ]; then
     rm -r ~/tmp
